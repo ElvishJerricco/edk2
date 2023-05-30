@@ -216,6 +216,11 @@ FatIFileAccess (
   Volume = OFile->Volume;
   Task   = NULL;
 
+  if (*BufferSize > (10U * 1024U * 1024U)) {
+    IFile->Position += 10U * 1024U * 1024U;
+    return EFI_BAD_BUFFER_SIZE;
+  }
+
   //
   // Write to a directory is unsupported
   //
